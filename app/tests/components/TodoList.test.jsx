@@ -30,7 +30,3 @@ describe('TodoList', () => {
     });
 });
 
-
-
-
-
