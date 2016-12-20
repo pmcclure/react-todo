@@ -4,8 +4,6 @@ import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 import TodoApp from 'TodoApp';
 
-//var TodoApp = require('TodoApp');
-
 //Load foundation
 require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();

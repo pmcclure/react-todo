@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
     //script! is the script-loader plugin
@@ -27,7 +28,7 @@ module.exports = {
             './app/api'
         ],
         alias: {
-          applicationStyles: 'app/styles/app.scss',
+            applicationStyles: 'app/styles/app.scss',
         },
         extensions: ['', '.js', '.jsx']
     },
@@ -41,6 +42,11 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/
             }
+        ]
+    },
+    sassLoader: {
+        includePaths: [
+            path.resolve(__dirname, './node_modules/foundation-sites/scss')
         ]
     },
     //Used a source map so debuggin in chrome with debugger; doesn't convert all the code through webpack first

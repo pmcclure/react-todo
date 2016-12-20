@@ -1,1 +1,13 @@
 @import "base/variables";
+
+
+// foundation
+@import "base/foundation-settings";
+@import "foundation";
+@include foundation-everything;
+
+//Components
+@import "components/page-title";
+@import "components/container";
+@import "components/todo";
+
