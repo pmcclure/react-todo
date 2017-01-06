@@ -22,7 +22,7 @@ describe('Reducers', () => {
     describe('showCompletedReducer', () => {
         it('should toggle show completed', () => {
             var action = {
-                type: 'TOGGLE_SHOW_COMPLETED',                
+                type: 'TOGGLE_SHOW_COMPLETED',
             }
 
             //pass in empty string (current state) and action above
@@ -36,16 +36,16 @@ describe('Reducers', () => {
         it('should add a todo', () => {
             var action = {
                 type: 'ADD_TODO',
-                text: 'walk the dog'  
+                text: 'walk the dog'
             }
-            
+
             var res = reducers.todosReducer(df([]), df(action));
 
             expect(res.length).toEqual(1);
             expect(res[0].text).toEqual(action.text);
         })
 
-           it('should toggle todo', () => {
+        it('should toggle todo', () => {
             var todos = [{
                 id: 123,
                 text: 'Something',
@@ -53,7 +53,7 @@ describe('Reducers', () => {
                 createdAt: 123,
                 completedAt: 125
             }];
-            
+
             var action = {
                 type: 'TOGGLE_TODO',
                 id: 123
@@ -62,6 +62,25 @@ describe('Reducers', () => {
 
             expect(res[0].completed).toEqual(false);
             expect(res[0].completedAt).toEqual(undefined);
+        })
+
+        it('should add existing todos', () => {
+            var todos = [{
+                id: 1,
+                text: 'Stuff',
+                completed: false,
+                completedAt: undefined,
+                createdAt: 123
+            }];
+            var action = {
+                type: 'ADD_TODOS',
+                todos
+            };
+
+            var res = reducers.todosReducer(df([]), df(action));
+
+            expect(res.length).toEqual(1);
+            expect(res[0]).toEqual(todos[0]);
         })
     });
 });
