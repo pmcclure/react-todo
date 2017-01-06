@@ -36,7 +36,7 @@ describe('Actions', () => {
             type: 'TOGGLE_TODO',
             id: '1'
         };
-        var res = actions.toggleTodo('1')
+        var res = actions.toggleTodo('1');
 
         expect(res).toEqual(action);
     });

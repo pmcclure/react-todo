@@ -1,13 +1,17 @@
 import React from 'react';
+var {connect} = require('react-redux');
+var actions = require('actions');
 
-const AddTodo = React.createClass({
+//export just used for testing
+export const AddTodo = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
+        var {dispatch} = this.props;
         var todoText = this.refs.todoText.value;
 
         if (todoText.length > 0) {
             this.refs.todoText.value = '';
-            this.props.onAddTodo(todoText);
+            dispatch(actions.addTodo(todoText));
         }
         else {
             this.refs.todoText.focus();
@@ -26,4 +30,5 @@ const AddTodo = React.createClass({
     }
 });
 
-module.exports = AddTodo;
+//two exports. The connected component (connected to redux) for the app and the unconnected component for testing
+export default connect()(AddTodo);
