@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 var {Provider} = require('react-redux');
-import { Route, Router, IndexRoute, hashHistory } from 'react-router';
+import {hashHistory } from 'react-router';
 
-import TodoApp from 'TodoApp';
 var actions = require('actions');
 var store = require('configureStore').configure();
-var TodoAPI = require('TodoAPI');
+import firebase from 'app/firebase';
+import router from 'app/router/';
+
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        hashHistory.push('/todos');
+    }
+    else {
+        hashHistory.push('/');
+    }
+})
+
 
 store.dispatch(actions.startAddTodos());
 
@@ -16,10 +26,11 @@ $(document).foundation();
 
 require('style!css!sass!applicationStyles');
 
-//The Provider wraps the core component so child components can access the redux store using connect()
+
+
 ReactDOM.render(
     <Provider store={store}>
-        <TodoApp />
+       {router}
     </Provider>,
     document.getElementById('app')
 );
