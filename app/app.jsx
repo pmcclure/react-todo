@@ -8,14 +8,7 @@ var actions = require('actions');
 var store = require('configureStore').configure();
 var TodoAPI = require('TodoAPI');
 
-store.subscribe(() => {
-    var state = store.getState();
-    console.log('New state', state);
-    TodoAPI.setTodos(state.todos);
-})
-
-var initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos))
+store.dispatch(actions.startAddTodos());
 
 //Load foundation
 require('style!css!foundation-sites/dist/foundation.min.css');
@@ -23,6 +16,7 @@ $(document).foundation();
 
 require('style!css!sass!applicationStyles');
 
+//The Provider wraps the core component so child components can access the redux store using connect()
 ReactDOM.render(
     <Provider store={store}>
         <TodoApp />
