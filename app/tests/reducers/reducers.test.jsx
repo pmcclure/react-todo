@@ -94,5 +94,53 @@ describe('Reducers', () => {
             expect(res.length).toEqual(1);
             expect(res[0]).toEqual(todos[0]);
         })
+
+        it('should wipe todos on logout', () => {
+            var todos = [{
+                id: 1,
+                text: 'Stuff',
+                completed: false,
+                completedAt: undefined,
+                createdAt: 123
+            }];
+            var action = {
+                type: 'LOGOUT'
+            };
+
+            var res = reducers.todosReducer(df(todos), df(action));
+
+            expect(res.length).toEqual(0);
+        })
+    });
+
+    describe('authReducer', () => {
+        it('should store uid on login', () => {
+            const action = {
+                type: 'LOGIN',
+                uid: 'sf123123'
+            }
+
+            const res = reducers.authReducer(undefined, df(action));
+
+            expect(res).toEqual({
+                uid: action.uid
+            });
+        });
+
+        it('should wipe auth field on logout', () => {
+            const authData = {
+                uid: 'dsfw342f2'
+            }
+
+            const action = {
+                type: 'LOGOUT'
+            }
+
+            const res = reducers.authReducer(df(authData), df(action));
+
+            expect(res).toEqual({});
+
+        })
+
     });
 });
